@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO</title>
+</head>
+<body>
+<a href="BackEnd.python_call_script" id="link" data-bind="true">GUI clickable link</a>
+<!-- The "a" tag needs to have unique ID and data-bind attribute set to "true"
+The BackEnd and function_name have to be set in href attribute as displayed above.
+The "a" tag can be styled using CSS with other HTML elements inside it -->
+
+
+<form action="BackEnd.form_function_name" id="form" data-bind="true">
+    <input type="text" id="form_input1" name="name">
+    <input type="password" name="pass">
+    <br>
+    <input type="checkbox" name="checkbox1">1
+    <input type="checkbox" name="checkbox2">2
+    <input type="checkbox" name="checkbox3">3
+    <input type="submit" value="Submit" id="form_submit">
+</form>
+<!-- The "form" tag needs to have unique ID and data-bind attribute set to "true".
+The BackEnd and form_function_name have to be set in action attribute as
+displayed above. The argument given to BackEnd.form_function_name on form submit
+will be a json string of the form data. -->
+<div id="result"></div>
+<script src="{{ 'js/jquery.min.js'|staticfile }}"></script>
+<script>
+
+    // You can treat the class inherited from htmlPy.Object (in this case, BackEnd)
+    // as a javascript object.
+    window.onload = function () {
+        BackEnd.javascript_function('hello',99);//并没有用
+    };
+
+    function javascript_function(name,age) {
+        BackEnd.javascript_function(name,age);
+    }
+
+    function call_by_backend(args) {
+        var data = JSON.parse(args);
+        alert(data.name);
+        var result = BackEnd.javascript_function('hello',99);
+        alert(result);
+        $('#form_input1').val('哈哈哈');
+    }
+</script>
+</body>
+</html>
